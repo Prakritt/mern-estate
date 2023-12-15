@@ -112,5 +112,29 @@ import{useNavigate} from 'react-router-dom'
 navigate = useNavigate()
 navigate('/location)
 
+
+API::
+Implementing the sign in functionality:
+1.Check if the email exists.
+    Done using User.findOne({email:email})
+    
+2. Check the password if email exists 
+    compare the password using bcryptjs.compareSync(password,validUser.password)
+
+3. If both are correct, we need to authenticate the user. 
+This is done by adding cookie inside the browser. 
+hash Token inside browser cookie contains email or the id of the user
+Then each time the user wants to do something crucial, we check their authntication with the help of the token in the cookie
+
+Creating token : 
+json webtoken is used to create the hash of the user
+import jwt from jsonwebtoken.
+Generally, id is used for creating the token of the person because even if someone finds the id,
+much information is not revealed with just the id. 
+res.cookie('access-token',token,{httpOnlyLtrue,expires: new Date.now() + 60 * 1000}).status(200).json(validUser)
+
 Status codes: 
-201 : means that something is created. 
+201 : means that something is created.
+
+404 : Not Found  
+401 : Lacks valid authentication credentials. 
