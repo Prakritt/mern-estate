@@ -49,3 +49,16 @@ Model :
     later while sorting these info can be used to sort them by latest time
 Now, based on the schema, we create a model with the following line of code: 
 const User = mongoose.model('User',userSchema) --> Mongodb will automatically add s and make 'User' as 'Users'
+
+
+Creating a route : 
+    request is the data that we get from the client side and response is the data that we send back from the server side. 
+    We have a server and a client. The interaction between these two is performed by request and the response. 
+
+The best practise is to create separate folder for api routes and the functions. It is the best practice to even put the
+logic for handling the routes into a separate function. These logic and functions are called as controllers and 
+are placed inside the controller folder. 
+
+
+
+
