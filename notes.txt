@@ -87,6 +87,9 @@ Another folder :
 utils> error.js
     function errorHandler --- Takes statusCode and message as input 
     then use javascript constructor to create the error and add statuscode and message to the error and throw error or return error. 
+We pass the error to the main error handling function as next(new error("statusCode","message"))
+Then, on index.js, there will be main error handler app.use(err,req,res,next) and this function will be the ultimate end of the response cycle to return the response. 
+
 
 Status codes: 
 201 : means that something is created. 
