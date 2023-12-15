@@ -60,5 +60,25 @@ logic for handling the routes into a separate function. These logic and function
 are placed inside the controller folder. 
 
 
+Creating an API sign Up route: 
+    -Get the information like email and password
+    - Hash the password
+    -Save inside the database 
+        - We create a separate file for the authentication and not place the authentication logic inside the user controller 
 
 
+By default, we are not allowed to send any json to the server. We need to enable sending body of the request by : 
+app.use(express.json())
+
+The saving of the model takes time depending in the network speed. So, to prevent error, we use await. 
+By doing this, the exection pauses until that lin of code is fully executed and then only moves to the next line.
+
+For hashing the password
+npm install bcryptjs
+
+ERROR HANDLING WITH EXPRESS 
+use try and catch statement and if error happens, send status 500. 
+The error can be handled by using a middleware function. 
+
+Status codes: 
+201 : means that something is created. 
