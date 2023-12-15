@@ -91,5 +91,26 @@ We pass the error to the main error handling function as next(new error("statusC
 Then, on index.js, there will be main error handler app.use(err,req,res,next) and this function will be the ultimate end of the response cycle to return the response. 
 
 
+For setting a proxy in the front-end:
+Proxy enables communication between different origins during the development. 
+export default defineConfig({
+  server:{
+    proxy: {
+      '/api':{
+        target:"http://localhost:3000",
+        secure: false
+      }
+    }
+  }
+  ,
+  plugins: [react()],
+})
+This is done in vite.config.js
+
+In order to navigate after fulfilling certain actions, use the following
+import{useNavigate} from 'react-router-dom'
+navigate = useNavigate()
+navigate('/location)
+
 Status codes: 
 201 : means that something is created. 
