@@ -79,6 +79,14 @@ npm install bcryptjs
 ERROR HANDLING WITH EXPRESS 
 use try and catch statement and if error happens, send status 500. 
 The error can be handled by using a middleware function. 
+For each error occured in different function of the app, we have to use try and catch block. The part inside the 
+try and catch block is almost same and repititive. 
+There can sometimes be error which is not in the system but error like password strength is not enough.We need to create 
+function that can handle such type of errors. 
+Another folder : 
+utils> error.js
+    function errorHandler --- Takes statusCode and message as input 
+    then use javascript constructor to create the error and add statuscode and message to the error and throw error or return error. 
 
 Status codes: 
 201 : means that something is created. 
