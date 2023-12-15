@@ -133,6 +133,51 @@ Generally, id is used for creating the token of the person because even if someo
 much information is not revealed with just the id. 
 res.cookie('access-token',token,{httpOnlyLtrue,expires: new Date.now() + 60 * 1000}).status(200).json(validUser)
 
+
+USING REDUX FOR GLOBAL STATE 
+npm install @reduxjs/toolkit
+npm install react-redux
+After the installation, we need to create the store. 
+https://redux-toolkit.js.org/tutorials/quick-start
+Inside src, create a folder named redux and inside there, create a file named store
+store.js : 
+    import { configureStore } from '@reduxjs/toolkit'
+
+    export const store = configureStore({
+    reducer: {},
+    })
+
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+    serializableCheck : false
+  }) ---> By doing this, we will not get any error for not serializing the variables 
+  For example, File object is not serializable. 
+  Serializable data refers to the data that can be easily conveterd into a plain javascript object and later 
+  be serilized into a string. 
+
+  Now after creating the store, we need to provide the redux store to react. 
+    import React from 'react'
+    import ReactDOM from 'react-dom/client'
+    import App from './App.jsx'
+    import './index.css'
+    import {store} from './redux/store.js'
+    import { Provider } from 'react-redux'
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+    )
+
+Then, we need to create a slice. For example in order to create a slice for a user, inside redux, new folder user> user.slice.js
+Then, the next step is to create a redux state slice: 
+
+
+
+After that, we need to add the reducer to the store. 
+In order to test the working, there is a chrome extension named redux dev tool.
+
+
+
 Status codes: 
 201 : means that something is created.
 
