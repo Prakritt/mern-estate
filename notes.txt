@@ -1,0 +1,19 @@
+npm create vite@latest client  -- > Client is the folder inside which we want to initialize react. 
+Package.json contains the dependencies. In order to install it, just hit nom install 
+extensions : react snippets, Auto Rename Tag , console ninja(used for console logging inside vs code), Prettier, Tailwind Css Intellisense
+All the pages of the application will be placed inside the "Pages" folder inside the "src" folder.
+
+npm install react-router-dom
+Inside App.jsx:
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+    return <BrowserRouter>
+        <Routes>
+        <Route path = "/" element={<Home/>}/>
+        <Route path ="/sign-in" element={<SignIn/>}/>
+        <Route path = "/sign-up" element={<SignUp/>}/>
+        <Route path = "/profile" element ={<Profile/>}/>
+        <Route path = "/about" element ={<About/>}/>
+        
+        </Routes>
+    </BrowserRouter>
+
