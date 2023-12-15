@@ -17,3 +17,20 @@ Inside App.jsx:
         </Routes>
     </BrowserRouter>
 
+
+
+For components, components are stored inside "components" folder inside "src" folder. 
+Header component will be placed between BrowserRouter and Route as: 
+    <BrowserRouter>
+  <Header/>
+    <Routes>
+
+
+We can get icons from the package react-icons: npm install react-icons:
+    import {FaSearch} from 'react-icons/fa'
+
+To redirect on a click:
+    import {Link} from 'react-router-dom'
+    Link redirects us from one page to the another without refreshing the page. 
+
+    
