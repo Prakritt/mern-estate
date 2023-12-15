@@ -33,4 +33,7 @@ To redirect on a click:
     import {Link} from 'react-router-dom'
     Link redirects us from one page to the another without refreshing the page. 
 
+While connecting to the database: 
+    mongoose.connect("mongodb+srv://Prakrit:mongodb123@mern-estate.lf0bqat.mongodb.net/mern-estate?retryWrites=true&w=majority")
+    mern-estate after / and before ? denoted the name of the cluster in the database. 
     
