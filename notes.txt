@@ -36,4 +36,16 @@ To redirect on a click:
 While connecting to the database: 
     mongoose.connect("mongodb+srv://Prakrit:mongodb123@mern-estate.lf0bqat.mongodb.net/mern-estate?retryWrites=true&w=majority")
     mern-estate after / and before ? denoted the name of the cluster in the database. 
-    
+
+
+Model : 
+ Models contains the rules and requirements so that the person communicating with the database follows these
+ rules and regulations and create data based on these rules. 
+ const userSchema = new mongoose.Schema({name:{type:String,unique:true}},{timestamps:true}
+ api>models>user.model.js
+ Inside the schema, setting the {timestamps : true} does the following : 
+    a. Time of creation of user 
+    b. time of update of user
+    later while sorting these info can be used to sort them by latest time
+Now, based on the schema, we create a model with the following line of code: 
+const User = mongoose.model('User',userSchema) --> Mongodb will automatically add s and make 'User' as 'Users'
