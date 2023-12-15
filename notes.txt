@@ -19,6 +19,7 @@ Inside App.jsx:
 
 
 
+
 For components, components are stored inside "components" folder inside "src" folder. 
 Header component will be placed between BrowserRouter and Route as: 
     <BrowserRouter>
@@ -176,7 +177,55 @@ Then, the next step is to create a redux state slice:
 After that, we need to add the reducer to the store. 
 In order to test the working, there is a chrome extension named redux dev tool.
 
+We want to reuse the data because we dont want the user to enter data again and again each time he refreshes the page. 
+For that, we need to store data in local storage of the browser. 
 
+
+Adding redux persist : 
+npm install redux-persist 
+In store.js, we will combine the reducers and persist the recuer using persist reducer.
+
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import userReducer from './../redux/user/user.slice'
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+const rootReducer = combineReducers({
+    user: userReducer
+})
+
+const persistConfig = {
+    key : 'root',
+    storage,
+    version : 1
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+export const store = configureStore({
+  reducer: {
+    persistedReducer
+  },
+  middleware: getDefaultMiddleware => getDefaultMiddleware({
+    serializableCheck : false
+  })
+})
+
+export const persistor = persistStore(store)
+Persistconfig stores the name of the key, version and the storage in the local storage 
+
+
+Finally in main.js : 
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+
+    </PersistGate>
+  </Provider>
+)
 
 Status codes: 
 201 : means that something is created.
