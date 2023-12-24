@@ -303,6 +303,10 @@ Veryfying the user or checkin if the user is authenticated to access certain rou
   - Getting the token : const token = req.cookies.access_token; --> access_token is the name with which the token is stored in local storage
 -If there no token, direct to the error handler with 401 and unauthorized
 -If there is token, need to check if the token is valid or not 
+-Then, add the user to the request. 
+
+
+
 
 
 Creating a file reference using useRef hook: 
