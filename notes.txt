@@ -296,6 +296,15 @@ Saving the file
 -Create the storage reference as: cont storageRef = ref(storage, fileName);
 The ref function is used to create a specific reference in the firebase storage bucket. 
 
+Veryfying the user or checkin if the user is authenticated to access certain routes : 
+- Get the token 
+  - To extract the token from the cookie, install cookie-parser
+  - Go to index.js initialize it as : app.use(cookieParser())
+  - Getting the token : const token = req.cookies.access_token; --> access_token is the name with which the token is stored in local storage
+-If there no token, direct to the error handler with 401 and unauthorized
+-If there is token, need to check if the token is valid or not 
+
+
 Creating a file reference using useRef hook: 
 
 
