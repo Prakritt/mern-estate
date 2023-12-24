@@ -4,6 +4,7 @@ import { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import {signInStart,signInSuccess,signInFailure} from './../redux/user/user.slice';
+import OAuth from '../components /OAuth'
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -52,7 +53,9 @@ export default function SignIn() {
         <input onChange={handleChange} id="email" type="text" placeholder='john@example.com' className='p-3 rounded-lg' />
         <input onChange = {handleChange} id="password" type="password" placeholder='********' className='p-3 rounded-lg' />
         <button disabled={loading} onClick={handleSignIn} className='bg-slate-700 text-slate-100 rounded-lg p-3 hover:opacity-95 disabled:opacity-80' >Sign In</button>
+        <OAuth/>
       </form>
+      
       <div className='flex gap-2 my-2'>
         <p>Dont have an account?</p>
         <Link to='/sign-up'>
