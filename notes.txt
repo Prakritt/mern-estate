@@ -248,6 +248,28 @@ const firebaseConfig = {
   appId: "1:920483808926:web:ea7cb90ddc3ab2c177dd8f"
 };
 
+-At first, create a handler that handles the click for google login or sign up. Both will be the same button.
+try{
+            
+            const provider = new GoogleAuthProvider()
+            const auth = getAuth(app)
+            const result = await signInWithPopup(auth,provider);
+            const res = await fetch('/api/auth/google',{
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json',
+                },
+                body: JSON.stringify({name:result.user.displayName, email : result.user.email, photo : result.user.photoURL})
+            })
+                const data = await res.json();
+                dispatch(signInSuccess(data));
+                navigate('/')
+            }catch(error){
+            console.log(error)
+        }
+
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -256,6 +278,26 @@ VITE_FIREBASE_API_KEY="APPLEKEY"
 
 Accessing the environmental variable: 
 cont api_key = import.meta.env.VITE_FIREBASE_API_KEY
+
+Adding the Image upload functionality 
+- Create a input with type file 
+-The default firebase rule is to not let everyone to read and write but we want to change so that 
+everyone can read but write can be done only if the sizee is less than 2 * 1024 * 24
+-Here, first 1024 means KB and the second KB means MB.
+allow read; --> No condition for reading 
+allow write: if request.resource.size<2*1024*1024 && request.resource.contentType.matches('image/.*)
+-Now, with these rules we now have access to read and upload the file. 
+-Now, ,we want to track the file change using useState hook. 
+-After that, we can use the useEffect hook to see the changes and track if there have been any changes
+and if there is a file, we want to run certain function
+Saving the file 
+-We need to create a storage as const storage = getStoreage(app) //Based on the storage firebase recognized us and gives the appropriate access to an application.
+-Set the file name as : const fileName = new Date().getTime()+file.name
+-Create the storage reference as: cont storageRef = ref(storage, fileName);
+The ref function is used to create a specific reference in the firebase storage bucket. 
+
+Creating a file reference using useRef hook: 
+
 
 Status codes: 
 201 : means that something is created.
