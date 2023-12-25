@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
-import { useRef } from 'react'
+import { useRef } from 'react';
+import {Link} from 'react-router-dom';
 
 import {getDownloadURL, getStorage,ref, uploadBytesResumable} from 'firebase/storage';
 import { app } from '../firebase';
@@ -132,6 +133,13 @@ export default function Profile() {
         <button disabled={loading} className='uppercase bg-slate-700 
         text-slate-100 rounded-lg p-3 hover:opacity-95
         disabled:opacity-80'>{loading?'Loading':'Update'}</button>
+        
+        <Link to="/create-listing"
+          className='bg-green-700 text-white p-3 rounded-lg
+          uppercase text-center hover:opacity-95'
+        >
+          Create Listing 
+        </Link>
 
       </form>
 
