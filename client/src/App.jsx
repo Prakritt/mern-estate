@@ -1,14 +1,16 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import SignIn from './pages/Signin'
-import Profile from './pages/Profile'
-import About from './pages/About'
-import SignUp from './pages/SIgnUp'
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import SignIn from './pages/Signin';
+import Profile from './pages/Profile';
+import About from './pages/About';
+import SignUp from './pages/SIgnUp';
 
-import Header from './components /Header'
-import PrivateRoute from './components /PrivateRoute'
-import CreateListing from './pages/CreateListing'
+import Header from './components /Header';
+import PrivateRoute from './components /PrivateRoute';
+import CreateListing from './pages/CreateListing';
+import EditListing from './pages/EditListing';
+import Listing from './pages/Listing';
 
 function App() {
   return <BrowserRouter>
@@ -21,9 +23,9 @@ function App() {
       <Route element = {<PrivateRoute/>}>
         <Route path = "/profile" element ={<Profile/>}/>
         <Route  path="/create-listing" element = {<CreateListing/>}/>
-
+        <Route path="/edit-listing/:id" element={<EditListing/>} />
       </Route>
-
+      <Route path="/listing/:id" element={<Listing/>}/>
       
     </Routes>
   </BrowserRouter>

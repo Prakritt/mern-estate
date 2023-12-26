@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { useRef } from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 
 import {getDownloadURL, getStorage,ref, uploadBytesResumable} from 'firebase/storage';
 import { app } from '../firebase';
@@ -17,7 +17,7 @@ export default function Profile() {
   const [updateSuccess,setUpdateSuccess] = useState(false);
   const [showListingsError,setShowListingsError] = useState(false)
   const [userListings,setUserListings] = useState([])
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
 
@@ -130,8 +130,20 @@ export default function Profile() {
     }
 
   }
-  console.log("User Listings",userListings)
+  const handleDeleteListing = async (listingId)=>{
+    try{
+      const res = await fetch(`/api/listing/delete/${listingId}`,{
+        method : 'DELETE'
+      })
+      setUserListings((prev)=>prev.filter((listing)=>listing._id !== listingId));
+    }catch(err){
+      console.log(err.message);
+    }
+  }
 
+  const editListing = (listingId)=>{
+    navigate(`/edit-listing/${listingId}`);
+  }
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7 '>Profile</h1>
@@ -181,9 +193,9 @@ export default function Profile() {
       </p>
       <button onClick={handleShowListings} className='text-green-700 w-full text-center'> Show listings</button>
       {showListingsError && (<p className='text-red-700 text-sm'>Error Showing Listings</p>)}
-      <div className="flex flex-col gap-3">
+      {userListings &&  userListings.length > 0 &&(<div className="flex flex-col gap-3">
         <h1 className='font-semibold text-center mt-7 text-2xl'>Your Listings</h1>
-        {userListings &&  userListings.length > 0 && userListings.map((listing)=>{
+        {userListings.map((listing)=>{
           return (
             <div key = {listing._id} className="flex  justify-between items-center gap-3 border p-3">
               <Link className='flex  justify-between items-center gap-3  p-3 flex-1' to={`/listing/${listing._id}` }>
@@ -191,8 +203,8 @@ export default function Profile() {
                   <p className='font-semibold flex-1 hover:underline truncate'>{listing.name}</p>   
               </Link>
               <div className="flex flex-col items-center">
-                <button className='text-red-700 uppercase'>Delete</button>
-                <button className='text-green-700 uppercase'>Edit</button>
+                <button onClick={()=>handleDeleteListing(listing._id)} className='text-red-700 uppercase'>Delete</button>
+                <button onClick={()=>editListing(listing._id)} className='text-green-700 uppercase'>Edit</button>
 
               </div>
 
@@ -200,7 +212,7 @@ export default function Profile() {
             </div>
           )
         }) }
-      </div>
+      </div>)}
     </div>
   )
 }
