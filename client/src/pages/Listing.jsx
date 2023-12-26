@@ -1,6 +1,8 @@
 import React,{useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import {FaBath, FaBed, FaChair, FaMapMarkedAlt, FaParking} from 'react-icons/fa'
+import { useSelector } from 'react-redux';
+import Contact from '../components /Contact';
 
 
 
@@ -9,6 +11,8 @@ function Listing() {
     const [listing,setListing] = useState(null);
     const [loading,setLoading] = useState(true);
     const [error,setError] = useState(false);
+    const {currentUser} = useSelector((state)=>state.user)
+    const [contact,setContact] = useState(false);
     useEffect(()=>{
         const fetchListing = async()=>{
             try{
@@ -43,7 +47,7 @@ function Listing() {
                     <div className='w-full h-80'>
                         <img src={`${listing.imageUrls[0]}`} alt="listing_cover" className='w-full h-full object-cover ' />
                     </div>
-                    <div className='p-4 max-w-5xl mx-auto'>
+                    <div className='p-4 max-w-5xl mx-auto flex flex-col gap-4'>
                         <div className='flex flex-col gap-3'>
                             <div className='flex gap-4'>
                                 <h1 className='font-semibold text-2xl'>{listing.name} - ${listing.regularPrice} </h1>
@@ -89,7 +93,12 @@ function Listing() {
                             </ul>
                             
                         </div>
+                        {currentUser && listing.userRef !== currentUser._id &&  !contact && <button  onClick={()=>setContact(true)} className='border bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3 w-full'>Contact LandLord</button>
+}                       
+                        {contact && <Contact listing={listing}/>}
                     </div>
+
+
                 </div>
                
         

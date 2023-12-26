@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Listing from "../models/listing.model.js";
 import { errorHandler } from "../utils/error.js";
+import User from "../models/user.model.js";
 
 export const createListing = async(req,res,next)=>{
 
@@ -70,5 +71,23 @@ export const getListing = async (req,res,next)=>{
 
     }catch(error){
         next(error);
+    }
+}
+
+export const getUserDetails = async(req,res,next)=>{
+    try{
+        const userRef = req.params.userId;
+        console.log('userRef',userRef)
+        const user = await User.findById(userRef);
+        
+        console.log(user)
+        if(!user){
+            next(errorHandler(404,'User not Found!!'))
+        }
+        const {password,...rest} = user._doc;
+        res.status(200).json(rest)
+
+    }catch(error){
+        next(error)
     }
 }
