@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import SignIn from './pages/Signin';
 import Profile from './pages/Profile';
 import About from './pages/About';
-import SignUp from './pages/SIgnUp';
+import SignUp from './pages/SignUp';
 
 import Header from './components /Header';
 import PrivateRoute from './components /PrivateRoute';
