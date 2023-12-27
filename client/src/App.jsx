@@ -11,6 +11,7 @@ import PrivateRoute from './components /PrivateRoute';
 import CreateListing from './pages/CreateListing';
 import EditListing from './pages/EditListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 function App() {
   return <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
         <Route path="/edit-listing/:id" element={<EditListing/>} />
       </Route>
       <Route path="/listing/:id" element={<Listing/>}/>
+      <Route path="/search" element = {<Search/>}/>
       
     </Routes>
   </BrowserRouter>
